@@ -1,0 +1,102 @@
+{
+  "@id": "urn:testazuresphere:AzureSphereSampleDeviceAVNET:1",
+  "@type": "CapabilityModel",
+  "contents": [],
+  "displayName": {
+    "en": "Azure Sphere AVNET"
+  },
+  "implements": [
+    {
+      "@id": "urn:testazuresphere:AzureSphereSampleDeviceAVNET:wilson:2",
+      "@type": "InterfaceInstance",
+      "displayName": {
+        "en": "Azure Sphere AVNET Interface"
+      },
+      "name": "AzureSphereAVNETInterface",
+      "schema": {
+        "@id": "urn:testazuresphere:AzureSphereSampleDeviceAVNET:AzureSphereAVNETInterface:2",
+        "@type": "Interface",
+        "contents": [
+          {
+            "@id": "urn:testazuresphere:AzureSphereSampleDeviceAVNET:manufacturer:1",
+            "@type": "Property",
+            "displayName": {
+              "en": "Manufacturer"
+            },
+            "name": "manufacturer",
+            "schema": "string"
+          },
+          {
+            "@id": "urn:testazuresphere:AzureSphereSampleDeviceAVNET:model:1",
+            "@type": "Property",
+            "displayName": {
+              "en": "Model"
+            },
+            "name": "model",
+            "schema": "string"
+          },
+          {
+            "@id": "urn:testazuresphere:AzureSphereSampleDeviceAVNET:temperature:2",
+            "@type": "Telemetry",
+            "displayName": {
+              "en": "Temperature"
+            },
+            "name": "Temperature",
+            "schema": "float"
+          },
+          {
+            "@id": "urn:testazuresphere:AzureSphereSampleDeviceAVNET:pressure:2",
+            "@type": "Telemetry",
+            "displayName": {
+              "en": "Pressure"
+            },
+            "name": "Pressure",
+            "schema": "float"
+          },
+          {
+            "@id": "urn:testazuresphere:AzureSphereSampleDeviceAVNET:humidity:2",
+            "@type": "Telemetry",
+            "displayName": {
+              "en": "Humidity"
+            },
+            "name": "Humidity",
+            "schema": "float"
+          },
+          {
+            "@id": "urn:testazuresphere:AzureSphereSampleDeviceAVNET:co:2",
+            "@type": "Telemetry",
+            "displayName": {
+              "en": "CO2"
+            },
+            "name": "CO2",
+            "schema": "integer"
+          },
+          {
+            "@id": "urn:testazuresphere:AzureSphereSampleDeviceAVNET:light:2",
+            "@type": "Telemetry",
+            "displayName": {
+              "en": "Light"
+            },
+            "name": "Light",
+            "schema": "integer"
+          },
+          {
+            "@id": "urn:testazuresphere:AzureSphereSampleDeviceAVNET:dB:2",
+            "@type": "Telemetry",
+            "displayName": {
+              "en": "dB"
+            },
+            "name": "dB",
+            "schema": "integer"
+          }
+        ],
+        "displayName": {
+          "en": "Azure Sphere AVNET Interface"
+        }
+      }
+    }
+  ],
+  "@context": [
+    "http://azureiot.com/v1/contexts/IoTModel.json"
+  ]
+}

@@ -1,0 +1,59 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.8"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "avnet_drivers",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "avnet_drivers::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-avnet_drivers-Debug-0b51398f9947a4ddff70.json",
+					"name" : "avnet_drivers",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "C:/Users/charlie890414/Downloads/azureiot-lab-avnetdevkit/codes/Drivers/AVNET_SK/RealTime/out/build/x64-Debug (預設)",
+		"source" : "C:/Users/charlie890414/Downloads/azureiot-lab-avnetdevkit/codes/Drivers/AVNET_SK/RealTime"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 1
+	}
+}

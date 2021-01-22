@@ -1,0 +1,24 @@
+{
+  "SchemaVersion": 1,
+  "Name": "AzureSphereIoTCentral",
+  "ComponentId": "25025d2c-66da-4448-bae1-ac26fcdd3627",
+  "EntryPoint": "/bin/app",
+  "CmdArgs": [ "--ConnectionType", "DPS", "--ScopeID", "0ne002059A3" ],
+  "Capabilities": {
+    "Gpio": [
+      "$NETWORK_CONNECTED_LED",
+      "$LED_RED",
+      "$LED_GREEN",
+      "$LED_BLUE"
+    ],
+    "I2cMaster": [
+      "$I2cMaster2"
+    ],
+    "PowerControls": [
+      "ForceReboot"
+    ],
+    "AllowedConnections": [ "global.azure-devices-provisioning.net", "iotc-98a7fc40-da6a-4923-9275-f4b464478da9.azure-devices.net", "iotc-8ce1e03b-ba00-4305-90df-4d784ead2f1f.azure-devices.net", "iotc-8cf67a07-e437-451d-9a3f-3e68e20979c3.azure-devices.net", "iotc-5fe44059-e4ef-4bbf-8899-173c3e9e4856.azure-devices.net", "iotc-fd166f24-196e-4405-bc91-dc442891b41b.azure-devices.net", "iotc-84190463-1818-496f-8dfd-93c3fc6ed504.azure-devices.net", "iotc-14c71d9f-cb12-42c1-b43a-454e8a8e4786.azure-devices.net", "iotc-d03a03ee-8fd1-4283-99d3-d3a13bf8c4b7.azure-devices.net", "iotc-d697d7c1-d9b5-44b7-8a84-de176aafe738.azure-devices.net", "iotc-3d5282f0-2187-4a79-bebc-d5b28426deaf.azure-devices.net" ],
+    "DeviceAuthentication": "2aa50f74-c316-4064-b2f6-ccadf67917e2"
+  },
+  "ApplicationType": "Default"
+}
