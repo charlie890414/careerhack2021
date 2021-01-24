@@ -1,0 +1,3 @@
+[submodule "project/app/lib_src/emergency_detect/emergency-detect"]
+	path = project/app/lib_src/emergency_detect/emergency-detect
+	url = https://github.com/cliffxzx/emergency-detect.git
