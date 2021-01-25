@@ -36,6 +36,10 @@ static const uint8_t uart_port_num = OS_HAL_UART_PORT0;
 #define IMAGE_HEIGHT  32
 #define IMAGE_DEPTH   3
 #define MAX_PIECE     3
+#elif defined EMERGENCY_DETECT
+#define SERIES_LENGTH  512
+#define SERIES_FEATURE 6
+#define MAX_PIECE      3
 #endif
 
 /******************************************************************************/
@@ -49,9 +53,17 @@ extern int person_detection_loop(uint8_t* input_buf);
 static const char* label[] = {"Plane", "Car", "Bird", "Cat", "Deer", "Dog", "Frog", "Horse", "Ship", "Truck" };
 extern void cifar10_setup();
 extern int cifar10_invoke(uint8_t* input_buf);
+#elif defined EMERGENCY_DETECT
+static const char* label[] = { "", "WALKING", "WALKING_UPSTAIRS", "WALKING_DOWNSTAIRS", "SITTING", "STANDING", "LAYING" };
+extern void emergency_detect_setup();
+extern int emergency_detect_loop(uint8_t* input_buf);
 #endif
 
+#if (defined PERSON_DETECTION_DEMO) || (defined CIFAR10_DEMO)
 static uint8_t ImgBuf[IMAGE_WIDTH * IMAGE_HEIGHT * IMAGE_DEPTH];
+#elif defined EMERGENCY_DETECT
+static uint8_t InputBuf[SERIES_LENGTH * SERIES_FEATURE];
+#endif
 
 
 /* Mailbox semaphore */
@@ -179,6 +191,8 @@ static void NN_Task(void* pParameters)
 	person_detection_setup();
 #elif defined CIFAR10_DEMO
 	cifar10_setup();
+#elif defined EMERGENCY_DETECT
+	emergency_detect_setup();
 #endif
 
 	while (1) {
@@ -187,20 +201,44 @@ static void NN_Task(void* pParameters)
 			continue;
 		}
 
-		time_start = xTaskGetTickCount();
+		/* 3072 = 1024 x 3, as the maximum allowed user payload is 1024, we need split into 3 buffer. */
+		/* (HL and RT core must be synced) */
+		if (piece < MAX_PIECE) {
 
-		printf("%d\r\n", (uint8_t*)&ImgBuf[0]);
-
-		exec_time = xTaskGetTickCount() - time_start;
-		printf("exec_time = %ld\r\n\r\n", exec_time);
-
-		// Send the result back to HL core
-		recvBuf[PAYLOAD_START] = (uint8_t*)&ImgBuf[0];
-		for (int k = 0; k < 4; k++) {
-			recvBuf[PAYLOAD_START + 1 + k] = exec_time & 0xFF;
-			exec_time = exec_time >> 8;
+			// memcpy(&ImgBuf[piece * MAX_INTERCORE_BUF_SIZE], &recvBuf[PAYLOAD_START], MAX_INTERCORE_BUF_SIZE);
+			#if (defined PERSON_DETECTION_DEMO) || (defined CIFAR10_DEMO)
+			memcpy(&ImgBuf[piece * MAX_INTERCORE_BUF_SIZE], &recvBuf[PAYLOAD_START], MAX_INTERCORE_BUF_SIZE);
+			#elif defined EMERGENCY_DETECT
+			memcpy(&InputBuf[piece * MAX_INTERCORE_BUF_SIZE], &recvBuf[PAYLOAD_START], MAX_INTERCORE_BUF_SIZE);
+			#endif
+			piece++;
 		}
-		EnqueueData(inbound, outbound, sharedBufSize, &recvBuf[0], PAYLOAD_START + 5);
+
+		if (piece == MAX_PIECE) {
+			piece = 0;
+			time_start = xTaskGetTickCount();
+
+#if defined PERSON_DETECTION_DEMO
+			top_index = person_detection_loop((uint8_t*)&ImgBuf[0]);
+#elif defined CIFAR10_DEMO
+			top_index = cifar10_invoke((uint8_t*)&ImgBuf[0]);
+#elif defined EMERGENCY_DETECT
+			top_index = emergency_detect_loop((uint8_t*)&InputBuf[0]);
+#endif
+
+			printf("%s\r\n", label[top_index]);
+
+			exec_time = xTaskGetTickCount() - time_start;
+			printf("exec_time = %ld\r\n\r\n", exec_time);
+
+			// Send the result back to HL core
+			recvBuf[PAYLOAD_START] = top_index;
+			for (int k = 0; k < 4; k++) {
+				recvBuf[PAYLOAD_START + 1 + k] = exec_time & 0xFF;
+				exec_time = exec_time >> 8;
+			}
+			EnqueueData(inbound, outbound, sharedBufSize, &recvBuf[0], PAYLOAD_START + 5);
+		}
 	}
 }
 

@@ -14,7 +14,7 @@ add_compile_definitions(OSAI_FREERTOS)
 set(CMAKE_CXX_FLAGS "-Wno-reorder -Os -g -std=c++11 -fno-rtti -fpermissive -mlittle-endian -mthumb -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -fno-exceptions -ffunction-sections -fdata-sections -DTF_LITE_USE_GLOBAL_CMATH_FUNCTIONS -DTF_LITE_USE_GLOBAL_MAX -DTF_LITE_USE_GLOBAL_MIN -DNDEBUG -DTF_LITE_STATIC_MEMORY -DBUILD_ARM_GCC  -DNEUROPILOT_MICRO")
 
 add_link_options(-specs=nano.specs -specs=nosys.specs)
-set(infer_model "PERSON_DETECTION_DEMO")  # PERSON_DETECTION_DEMO, CIFAR10_DEMO
+set(infer_model "EMERGENCY_DETECT")  # PERSON_DETECTION_DEMO, CIFAR10_DEMO, EMERGENCY_DETECT
 
 
 if(${infer_model} STREQUAL "PERSON_DETECTION_DEMO")
@@ -43,6 +43,19 @@ elseif(${infer_model} STREQUAL "CIFAR10_DEMO")
                    ../../../lib_src/cifar10_demo/main.cc
                    ../../../lib_src/cifar10_demo/main_functions.cc
                    ../../../lib_src/cifar10_demo/cifar10_model_data.cc)
+
+elseif(${infer_model} STREQUAL "EMERGENCY_DETECT")
+    add_compile_definitions(EMERGENCY_DETECT)
+
+    # Executable
+    add_executable(${PROJECT_NAME}
+                   ./main.c
+                   ../../../../source/RTCORE_OS_HAL/src/os_hal_gpio.c
+                   ../../../../source/RTCORE_OS_HAL/src/os_hal_uart.c
+                   ../../../../source/RTCORE_OS_HAL/src/os_hal_mbox.c
+                   ../../../../source/RTCORE_OS_HAL/src/os_hal_mbox_shared_mem.c
+ 	               ../../../lib_src/emergency_detect/emergency-detect.cc
+	               ../../../lib_src/emergency_detect/main.cc)
 
 endif()
 
