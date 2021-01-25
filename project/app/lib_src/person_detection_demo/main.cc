@@ -27,85 +27,74 @@ limitations under the License.
 extern "C" void *__dso_handle __attribute__((weak));
 #endif
 
-
-const int tensor_arena_size = 73*1024;
+const int tensor_arena_size = 73 * 1024;
 uint8_t tensor_arena[tensor_arena_size] __attribute__((aligned(32)));
 
-tflite::ErrorReporter* error_reporter = nullptr;
-const tflite::Model* model = nullptr;
-tflite::MicroInterpreter* interpreter = nullptr;
+tflite::ErrorReporter *error_reporter = nullptr;
+const tflite::Model *model = nullptr;
+tflite::MicroInterpreter *interpreter = nullptr;
 
-TfLiteTensor* model_input = nullptr;
-TfLiteTensor* model_output = nullptr;
+TfLiteTensor *model_input = nullptr;
+TfLiteTensor *model_output = nullptr;
 
 const int inputPersonTensorSize = 96 * 96;
 
+extern "C" void person_detection_setup() {
+  static tflite::MicroErrorReporter micro_error_reporter;
+  error_reporter = &micro_error_reporter;
 
-extern "C" void person_detection_setup()
-{
-	static tflite::MicroErrorReporter micro_error_reporter;
-	error_reporter = &micro_error_reporter;
+  model = ::tflite::GetModel(person_detect_model_data);
+  if (model->version() != TFLITE_SCHEMA_VERSION) {
+    error_reporter->Report(
+        "Model provided is schema version %d not equal "
+        "to supported version %d.\r\n",
+        model->version(), TFLITE_SCHEMA_VERSION);
+    return;
+  }
+  error_reporter->Report("GetModel done, size %d bytes.\r\n", person_detect_model_data_len);
 
-	model = ::tflite::GetModel(person_detect_model_data);
-	if (model->version() != TFLITE_SCHEMA_VERSION) {
-		error_reporter->Report(
-			"Model provided is schema version %d not equal "
-			"to supported version %d.\r\n",
-			model->version(), TFLITE_SCHEMA_VERSION);
-		return;
-	}
-	error_reporter->Report("GetModel done, size %d bytes.\r\n", person_detect_model_data_len );
+  static tflite::MicroMutableOpResolver<3> resolver;
+  resolver.AddBuiltin(
+      tflite::BuiltinOperator_DEPTHWISE_CONV_2D,
+      tflite::ops::micro::Register_DEPTHWISE_CONV_2D());
+  resolver.AddBuiltin(tflite::BuiltinOperator_CONV_2D,
+                      tflite::ops::micro::Register_CONV_2D());
+  resolver.AddBuiltin(tflite::BuiltinOperator_AVERAGE_POOL_2D,
+                      tflite::ops::micro::Register_AVERAGE_POOL_2D());
 
-	static tflite::MicroMutableOpResolver<3> resolver;
-	resolver.AddBuiltin(
-		tflite::BuiltinOperator_DEPTHWISE_CONV_2D,
-		tflite::ops::micro::Register_DEPTHWISE_CONV_2D());
-	resolver.AddBuiltin(tflite::BuiltinOperator_CONV_2D,
-		tflite::ops::micro::Register_CONV_2D());
-	resolver.AddBuiltin(tflite::BuiltinOperator_AVERAGE_POOL_2D,
-		tflite::ops::micro::Register_AVERAGE_POOL_2D());
+  static tflite::MicroInterpreter static_interpreter(model, resolver, tensor_arena,
+                                                     tensor_arena_size, error_reporter);
+  interpreter = &static_interpreter;
 
-	static tflite::MicroInterpreter static_interpreter(model, resolver, tensor_arena,
-		tensor_arena_size, error_reporter);
-	interpreter = &static_interpreter;
+  TfLiteStatus allocate_status = interpreter->AllocateTensors();
+  if (allocate_status != kTfLiteOk) {
+    error_reporter->Report("AllocateTensors() failed.\r\n");
+    return;
+  }
 
-	TfLiteStatus allocate_status = interpreter->AllocateTensors();
-	if (allocate_status != kTfLiteOk) {
-		error_reporter->Report("AllocateTensors() failed.\r\n");
-		return;	
-	}
-
-	model_input = interpreter->input(0);
-	model_output = interpreter->output(0);
+  model_input = interpreter->input(0);
+  model_output = interpreter->output(0);
 }
 
 // 1: has person, 2: no person
-extern "C" int person_detection_loop(uint8_t* input_buf)
-{
-	for (int i = 0; i < inputPersonTensorSize; ++i) {
-		model_input->data.uint8[i] = input_buf[i];
-	}
+extern "C" int person_detection_loop(uint8_t *input_buf) {
+  for (int i = 0; i < inputPersonTensorSize; ++i) {
+    model_input->data.uint8[i] = input_buf[i];
+  }
 
-	if (kTfLiteOk != interpreter->Invoke()) {
-		error_reporter->Report("Invoke failed.");
-		return -1;
-	}
+  if (kTfLiteOk != interpreter->Invoke()) {
+    error_reporter->Report("Invoke failed.");
+    return -1;
+  }
 
-	uint8_t person_score = model_output->data.uint8[1];  // kPersonIndex
-	uint8_t no_person_score = model_output->data.uint8[2];  // kNotAPersonIndex
-	error_reporter->Report("person score:%d no person score %d", person_score,
+  uint8_t person_score = model_output->data.uint8[1];    // kPersonIndex
+  uint8_t no_person_score = model_output->data.uint8[2]; // kNotAPersonIndex
+  error_reporter->Report("person score:%d no person score %d", person_score,
                          no_person_score);
 
-	if(person_score > no_person_score) {
-		return 1;
-	}
-	else {
-		return 2;
-	}
+  if (person_score > no_person_score) {
+    return 1;
+  } else {
+    return 2;
+  }
 }
-
-
-
-
-
-
