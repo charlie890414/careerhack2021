@@ -164,3 +164,9 @@
 3079	3939	633253930	lib/MT3620_M4_Driver/MT3620_M4_BSP/FreeRTOS/CMakeFiles/MT3620_M4_FreeRTOS.dir/queue.c.obj	fac342937cb79e45
 3939	4185	633253930	lib/MT3620_M4_Driver/MT3620_M4_BSP/FreeRTOS/libMT3620_M4_FreeRTOS.a	9abc6dd66cb5957f
 4185	4502	633253931	lib/MT3620_M4_Driver/libMT3620_M4_Driver.a	6e82f8c8ac8f5de5
+3	848	633345167	CMakeFiles/azure-sphere-combo-cifar10-rtcore.dir/main.c.obj	4d4d416c4fbd04cb
+40	1735	633345168	CMakeFiles/azure-sphere-combo-cifar10-rtcore.dir/f0775b8a0a1a4f21b831569dbc2a2e8d/project/app/lib_src/emergency_detect/main.cc.obj	b9580211526d0a6e
+4	585	633345196	CMakeFiles/azure-sphere-combo-cifar10-rtcore.dir/f0775b8a0a1a4f21b831569dbc2a2e8d/project/app/lib_src/emergency_detect/emergency-detect.cc.obj	77575ef1ea52725
+586	1003	633345196	azure-sphere-combo-cifar10-rtcore.out	bd3314b27bf89659
+1003	1449	633345197	approotazure-sphere-combo-cifar10-rtcore/bin/app	1a44e6937d2ae9d7
+1449	2085	633345197	azure-sphere-combo-cifar10-rtcore.imagepackage	8f1dec186991fdad
