@@ -41,13 +41,23 @@ extern "C" void emergency_detect_setup() {
   error_reporter->Report("GetModel done, size %d bytes.\r\n", output_emergency_detect_tflite_len);
 
   static tflite::MicroMutableOpResolver<3> resolver;
-  resolver.AddBuiltin(
-      tflite::BuiltinOperator_DEPTHWISE_CONV_2D,
-      tflite::ops::micro::Register_DEPTHWISE_CONV_2D());
+  resolver.AddBuiltin(tflite::BuiltinOperator_MAX_POOL_2D,
+                      tflite::ops::micro::Register_MAX_POOL_2D());
+  resolver.AddBuiltin(tflite::BuiltinOperator_SOFTMAX,
+                      tflite::ops::micro::Register_SOFTMAX());
   resolver.AddBuiltin(tflite::BuiltinOperator_CONV_2D,
                       tflite::ops::micro::Register_CONV_2D());
+  resolver.AddBuiltin(tflite::BuiltinOperator_RESHAPE,
+                      tflite::ops::micro::Register_RESHAPE());
+  resolver.AddBuiltin(tflite::BuiltinOperator_FULLY_CONNECTED,
+                      tflite::ops::micro::Register_FULLY_CONNECTED());
+
+  // perhaps didn't needed
   resolver.AddBuiltin(tflite::BuiltinOperator_AVERAGE_POOL_2D,
                       tflite::ops::micro::Register_AVERAGE_POOL_2D());
+  resolver.AddBuiltin(tflite::BuiltinOperator_DEPTHWISE_CONV_2D,
+                      tflite::ops::micro::Register_DEPTHWISE_CONV_2D());
+
   static tflite::MicroInterpreter static_interpreter(model, resolver, tensor_arena,
                                                      tensor_arena_size, error_reporter);
   interpreter = &static_interpreter;
