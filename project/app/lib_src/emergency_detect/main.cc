@@ -40,7 +40,7 @@ extern "C" void emergency_detect_setup() {
   }
   error_reporter->Report("GetModel done, size %d bytes.\r\n", output_emergency_detect_tflite_len);
 
-  static tflite::MicroMutableOpResolver<3> resolver;
+  static tflite::MicroMutableOpResolver<7> resolver;
   resolver.AddBuiltin(tflite::BuiltinOperator_MAX_POOL_2D,
                       tflite::ops::micro::Register_MAX_POOL_2D());
   resolver.AddBuiltin(tflite::BuiltinOperator_SOFTMAX,

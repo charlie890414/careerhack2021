@@ -1,0 +1,6 @@
+{
+    "cmake.configureSettings": {
+        "CMAKE_CXX_COMPILER": "C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Linux/gcc_arm/bin/arm-none-eabi-g++.exe",
+        "CMAKE_C_COMPILER": "C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Linux/gcc_arm/bin/arm-none-eabi-gcc.exe"
+    }
+}

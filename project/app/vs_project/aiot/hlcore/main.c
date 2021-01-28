@@ -126,7 +126,8 @@ static int rtSocketFd = 0;
 static void SocketEventHandler(EventData *eventData);
 static EventData socketEventData = {.eventHandler = &SocketEventHandler};
 
-static const char *model_label[] = {};
+static const char* label[] = { "UNKNOWN", "WALKING", "WALKING_UPSTAIRS", "WALKING_DOWNSTAIRS", "SITTING", "STANDING", "LAYING" };
+
 static uint8_t index = 0;
 static uint32_t exec_time = 0;
 
@@ -248,7 +249,7 @@ static void *epoll_thread(void *ptr)
 		return -1;
 	}
 
-	struct timeval to = {.tv_sec = 1, .tv_usec = 0};
+	struct timeval to = {.tv_sec = 2, .tv_usec = 0};
 	int ret = setsockopt(rtSocketFd, SOL_SOCKET, SO_RCVTIMEO, &to, sizeof(to));
 	if (ret == -1)
 	{
@@ -292,6 +293,8 @@ int main(int argc, char *argv[])
 
 	pthread_spin_init(&update_lock, PTHREAD_PROCESS_PRIVATE);
 
+	Log_Debug("rtSocketFd %d\r\n", rtSocketFd);
+
 	if (pthread_create(&thread_id, NULL, epoll_thread, NULL))
 	{
 		Log_Debug("ERROR: creating thread fail\r\n");
@@ -301,10 +304,11 @@ int main(int argc, char *argv[])
 	Log_Debug("Init Success\r\n");
 
 	// Main loop
+	int sentMsgCount = 0;
 	while (!lp_isTerminationRequired())
 	{
 		int result = EventLoop_Run(lp_timerGetEventLoop(), -1, true);
-
+		
 		// Continue if interrupted by signal, e.g. due to breakpoint being set.
 		if (update_flag == 0)
 		{
@@ -329,9 +333,11 @@ int main(int argc, char *argv[])
 		/*start intercore communication*/
 		// max allowed size is 1KB for a single transfer, split 96*96 into 9 message
 		const uint32_t maxInterCoreBufSize = 1024;
-		const uint32_t msg[] = [1, 2, 3, 4, 5];
+		uint32_t msg[3072];
+		for (uint32_t i = 0; i < 3072; i++) msg[i] = 1;
 		for (uint32_t i = 0; i < sizeof(msg) / maxInterCoreBufSize; i++) {
-			ssize_t bytesSent = send(rtSocketFd, &msg[i * maxInterCoreBufSize], maxInterCoreBufSize, 0);
+			ssize_t bytesSent = send(rtSocketFd, &msg[i], maxInterCoreBufSize, 0);
+			Log_Debug("bytesSent %d\r\n", bytesSent);
 			if (bytesSent < 0) {
 				Log_Debug("ERROR: Unable to send message: %d (%s)\r\n", errno, strerror(errno));
 			} else if (bytesSent != maxInterCoreBufSize) {
