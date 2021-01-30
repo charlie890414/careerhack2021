@@ -1,0 +1,24 @@
+# ninja log v5
+1	377	633532495	CMakeFiles/AzureSphereAzureIoT.dir/e19389ff1b18dd4296d4faeafb009a24/app/vs_project/aiot/LearningPathLibrary/epoll_timerfd_utilities.c.obj	dc406323d5040726
+131	543	633532495	out/CMakeFiles/azsphere_libs.dir/eventloop_timer_utilities.c.obj	8fab8967334b8d27
+34	585	633532495	CMakeFiles/AzureSphereAzureIoT.dir/f0775b8a0a1a4f21b831569dbc2a2e8d/project/app/vs_project/aiot/LearningPathLibrary/AVNET/board.c.obj	c7c1c362235ee0f3
+87	611	633532495	out/CMakeFiles/azsphere_libs.dir/config.c.obj	a8565c13635c0056
+193	691	633532495	out/CMakeFiles/azsphere_libs.dir/inter_core.c.obj	f619ec2e2d890a56
+52	800	633532496	out/CMakeFiles/azsphere_libs.dir/device_twins.c.obj	348a358d94df46f0
+68	906	633532496	out/CMakeFiles/azsphere_libs.dir/direct_methods.c.obj	ac36b80ec84f7dbd
+18	935	633532496	CMakeFiles/AzureSphereAzureIoT.dir/main.c.obj	5b0141f6f478b30d
+378	969	633532496	out/CMakeFiles/azsphere_libs.dir/utilities.c.obj	159e4a065793eda6
+543	971	633532496	out/CMakeFiles/azsphere_libs.dir/terminate.c.obj	df4e8d105c8195fd
+109	974	633532496	out/CMakeFiles/azsphere_libs.dir/azure_iot.c.obj	128f654f1b84393f
+611	1082	633532496	out/CMakeFiles/azsphere_libs.dir/peripheral_gpio.c.obj	2e150a4fe21e9225
+586	1097	633532496	out/CMakeFiles/azsphere_libs.dir/timer.c.obj	635ffc6b054b6b87
+692	1232	633532496	drivers/CMakeFiles/avnet_drivers.dir/imu_temp_pressure.c.obj	97015f11d76f827f
+907	1327	633532496	drivers/CMakeFiles/avnet_drivers.dir/light_sensor.c.obj	a7ab341270842da9
+157	1485	633532496	out/CMakeFiles/azsphere_libs.dir/parson.c.obj	d52656d8b9cf0e8a
+801	1973	633532496	drivers/CMakeFiles/avnet_drivers.dir/f0775b8a0a1a4f21b831569dbc2a2e8d/project/app/vs_project/aiot/Drivers/AVNET_SK/Common/lps22hh_reg.c.obj	150a970aca665485
+1485	1974	633532497	out/libazsphere_libs.a	d3324f246a0ae4ae
+935	2730	633532498	drivers/CMakeFiles/avnet_drivers.dir/f0775b8a0a1a4f21b831569dbc2a2e8d/project/app/vs_project/aiot/Drivers/AVNET_SK/Common/lsm6dso_reg.c.obj	45ba33deb3eb605
+2730	2927	633532498	drivers/libavnet_drivers.a	4b55623e5112ea4d
+2927	3730	633532498	AzureSphereAzureIoT.out	45f3ff3a75feae72
+3730	3928	633532499	approotAzureSphereAzureIoT/bin/app	994a8ef7e248a1c6
+3928	4592	633532499	AzureSphereAzureIoT.imagepackage	88bac6268d5fd36a

@@ -1,0 +1,10 @@
+# ninja log v5
+52	350	633633780	CMakeFiles/AzureSphereAzureIoT.dir/D_/CareerHack2021/project/app/vs_project/aiot/LearningPathLibrary/AVNET/board.c.obj	a827d4e69297d392
+18	382	633633780	CMakeFiles/AzureSphereAzureIoT.dir/emergency-detect.c.obj	49dddc32e06f13d3
+73	402	633633780	CMakeFiles/AzureSphereAzureIoT.dir/D_/CareerHack2021/project/app/vs_project/aiot/LearningPathLibrary/epoll_timerfd_utilities.c.obj	307970f5969da646
+116	415	633633780	out/CMakeFiles/azsphere_libs.dir/config.c.obj	b493fb1f852eb91d
+171	446	633633780	out/CMakeFiles/azsphere_libs.dir/eventloop_timer_utilities.c.obj	93851d391ae1d055
+148	466	633633780	out/CMakeFiles/azsphere_libs.dir/inter_core.c.obj	a7d5a59f5bbe2abf
+1	481	633633780	CMakeFiles/AzureSphereAzureIoT.dir/main.c.obj	c2c3b3daed25e230
+94	557	633633780	out/CMakeFiles/azsphere_libs.dir/azure_iot.c.obj	e1871f29608c3d2e
+197	576	633633780	out/CMakeFiles/azsphere_libs.dir/direct_methods.c.obj	28856824d1260f81

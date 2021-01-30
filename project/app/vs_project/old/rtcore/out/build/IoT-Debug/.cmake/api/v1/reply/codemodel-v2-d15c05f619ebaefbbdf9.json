@@ -1,0 +1,185 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1
+					],
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						3,
+						4
+					]
+				},
+				{
+					"build" : "lib/MT3620_M4_Driver",
+					"childIndexes" : 
+					[
+						2,
+						3
+					],
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.11"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 1,
+					"source" : "C:/Users/charlie890414/Documents/github/CareerHack2021/MT3620_M4_Driver",
+					"targetIndexes" : 
+					[
+						1
+					]
+				},
+				{
+					"build" : "lib/MT3620_M4_Driver/lib/MT3620_M4_BSP",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.11"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 2,
+					"source" : "C:/Users/charlie890414/Documents/github/CareerHack2021/MT3620_M4_BSP",
+					"targetIndexes" : 
+					[
+						0
+					]
+				},
+				{
+					"build" : "lib/MT3620_M4_Driver/MT3620_M4_BSP/FreeRTOS",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.11"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 3,
+					"source" : "C:/Users/charlie890414/Documents/github/CareerHack2021/MT3620_M4_BSP/FreeRTOS",
+					"targetIndexes" : 
+					[
+						2
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"childIndexes" : 
+					[
+						1
+					],
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "azure-sphere-combo-cifar10-rtcore",
+					"targetIndexes" : 
+					[
+						3,
+						4
+					]
+				},
+				{
+					"childIndexes" : 
+					[
+						2,
+						3
+					],
+					"directoryIndexes" : 
+					[
+						1
+					],
+					"name" : "MT3620_M4_Driver",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						1
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						2
+					],
+					"name" : "MT3620_M4_BSP",
+					"parentIndex" : 1,
+					"targetIndexes" : 
+					[
+						0
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						3
+					],
+					"name" : "MT3620_M4_FreeRTOS",
+					"parentIndex" : 1,
+					"targetIndexes" : 
+					[
+						2
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 2,
+					"id" : "MT3620_M4_BSP::@65d7ac6506b1e25f9f50",
+					"jsonFile" : "target-MT3620_M4_BSP-Debug-9ae8f9939d6533f70e3f.json",
+					"name" : "MT3620_M4_BSP",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "MT3620_M4_Driver::@0a784b01baa11b8c1400",
+					"jsonFile" : "target-MT3620_M4_Driver-Debug-fa143967a7548beb2e84.json",
+					"name" : "MT3620_M4_Driver",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 3,
+					"id" : "MT3620_M4_FreeRTOS::@27948ec5e0fd4f40deb6",
+					"jsonFile" : "target-MT3620_M4_FreeRTOS-Debug-892f26cd6d0984051358.json",
+					"name" : "MT3620_M4_FreeRTOS",
+					"projectIndex" : 3
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "MakeImage::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-MakeImage-Debug-ab4a5575baa106ac2265.json",
+					"name" : "MakeImage",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "azure-sphere-combo-cifar10-rtcore::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-azure-sphere-combo-cifar10-rtcore-Debug-898f295b61fadcf6c7f3.json",
+					"name" : "azure-sphere-combo-cifar10-rtcore",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "C:/Users/charlie890414/Documents/github/CareerHack2021/project/app/vs_project/aiot/rtcore.old/out/build/IoT-Debug",
+		"source" : "C:/Users/charlie890414/Documents/github/CareerHack2021/project/app/vs_project/aiot/rtcore.old"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 1
+	}
+}

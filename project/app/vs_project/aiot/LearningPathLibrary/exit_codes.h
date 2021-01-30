@@ -27,6 +27,15 @@ typedef enum {
 
 	ExitCode_Validate_ConnectionType = 30,
     ExitCode_Validate_ScopeId = 31,
-    ExitCode_Validate_IotHubConnectionString = 32
+    ExitCode_Validate_IotHubConnectionString = 32,
+
+    ExitCode_TimerHandler_Consume = 20,
+    ExitCode_SendMsg_Send = 30,
+    ExitCode_SocketHandler_Recv = 40,
+    ExitCode_Init_EventLoop = 50,
+    ExitCode_Init_SendTimer = 60,
+    ExitCode_Init_Connection = 70,
+    ExitCode_Init_SetSockOpt = 80,
+    ExitCode_Init_RegisterIo = 90,
 
 } ExitCode;

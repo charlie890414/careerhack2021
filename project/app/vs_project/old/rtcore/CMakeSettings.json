@@ -1,0 +1,46 @@
+﻿{
+  "environments": [
+    {
+      "environment": "AzureSphere",
+      "BuildAllBuildsAllRoots": "true"
+    }
+  ],
+  "configurations": [
+    {
+      "name": "ARM-Release",
+      "generator": "Ninja",
+      "configurationType": "Release",
+      "inheritEnvironments": [ "AzureSphere" ],
+      "buildRoot": "${projectDir}\\out\\${name}",
+      "installRoot": "${projectDir}\\install\\${name}",
+      "cmakeToolchain": "${projectDir}\\AzureSphereRTCoreToolchainMTK.cmake",
+      "buildCommandArgs": "-v",
+      "ctestCommandArgs": "",
+      "variables": [
+        {
+          "name": "ARM_GNU_PATH",
+          "value": "${env.DefaultArmToolsetPath}",
+          "type": "STRING"
+        }
+      ]
+    },
+    {
+      "name": "ARM-Debug",
+      "generator": "Ninja",
+      "configurationType": "Debug",
+      "inheritEnvironments": [ "AzureSphere" ],
+      "buildRoot": "${projectDir}\\out\\${name}",
+      "installRoot": "${projectDir}\\install\\${name}",
+      "cmakeToolchain": "${projectDir}\\AzureSphereRTCoreToolchainMTK.cmake",
+      "buildCommandArgs": "-v",
+      "ctestCommandArgs": "",
+      "variables": [
+        {
+          "name": "ARM_GNU_PATH",
+          "value": "${env.DefaultArmToolsetPath}",
+          "type": "STRING"
+        }
+      ]
+    }
+  ]
+}

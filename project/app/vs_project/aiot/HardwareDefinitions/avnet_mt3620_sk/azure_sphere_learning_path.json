@@ -23,13 +23,63 @@
         {"Name": "BUTTON_B", "Type": "Gpio", "Mapping": "AVNET_MT3620_SK_USER_BUTTON_B", "Comment": "Button B"},
         {"Name": "ALERT_LED", "Type": "Gpio", "Mapping": "AVNET_MT3620_SK_USER_LED_RED", "Comment": "Alert LED"},
         {"Name": "LED1", "Type": "Gpio", "Mapping": "AVNET_MT3620_SK_USER_LED_BLUE", "Comment": "LED 1"},
-        {"Name": "LED2", "Type": "Gpio", "Mapping": "AVNET_MT3620_SK_APP_STATUS_LED_YELLOW", "Comment": "LED 2"},
-        {"Name": "NETWORK_CONNECTED_LED", "Type": "Gpio", "Mapping": "AVNET_MT3620_SK_WLAN_STATUS_LED_YELLOW", "Comment": "AVNET: Network Connected"},
-        {"Name": "RELAY", "Type": "Gpio", "Mapping": "AVNET_MT3620_SK_GPIO0", "Comment": "Click Relay"},
-        {"Name": "I2cMaster2", "Type": "I2cMaster", "Mapping": "AVNET_MT3620_SK_ISU2_I2C", "Comment": "AVNET Start Kit Definition"},
-        {"Name": "Adc0", "Type": "Adc", "Mapping": "AVNET_MT3620_SK_ADC_CONTROLLER0", "Comment": "AVNET Start Kit Definition"},
-        {"Name": "LED_RED", "Type": "Gpio", "Mapping": "AVNET_MT3620_SK_USER_LED_RED", "Comment": "Red LED"},
-        {"Name": "LED_GREEN", "Type": "Gpio", "Mapping": "AVNET_MT3620_SK_USER_LED_GREEN", "Comment": "Green LED"},
-        {"Name": "LED_BLUE", "Type": "Gpio", "Mapping": "AVNET_MT3620_SK_USER_LED_BLUE", "Comment": "Blue LED"}
+      {
+        
+        "Name": "LED2",
+        "Type": "Gpio",
+        "Mapping": "AVNET_MT3620_SK_APP_STATUS_LED_YELLOW",
+        "Comment": "LED 2"
+      },
+      {
+        
+        "Name": "NETWORK_CONNECTED_LED",
+        "Type": "Gpio",
+        "Mapping": "AVNET_MT3620_SK_WLAN_STATUS_LED_YELLOW",
+        "Comment": "AVNET: Network Connected"
+      },
+      {
+        
+        "Name": "RELAY",
+        "Type": "Gpio",
+        "Mapping": "AVNET_MT3620_SK_GPIO0",
+        "Comment": "Click Relay"
+      },
+      {
+        
+        "Name": "I2cMaster2",
+        "Type": "I2cMaster",
+        "Mapping": "AVNET_MT3620_SK_ISU2_I2C",
+        "Comment": "AVNET Start Kit Definition"
+      },
+      {
+        "Name": "ADC_CONTROLLER0",
+        "Type": "Adc",
+        "Mapping": "AVNET_MT3620_SK_ADC_CONTROLLER0",
+        "Comment": "AVNET Start Kit Definition"
+      },
+      {
+        "Name": "ADC_CHANNEL1",
+        "Type": "int",
+        "Mapping": "MT3620_ADC_CHANNEL1",
+        "Comment": "MT3620 SK: Connect external potentiometer to ADC controller 0, channel 1 using CLICK1 AN."
+      },
+        {
+          "Name": "LED_RED",
+          "Type": "Gpio",
+          "Mapping": "AVNET_MT3620_SK_USER_LED_RED",
+          "Comment": "Red LED"
+        },
+        {
+          "Name": "LED_GREEN",
+          "Type": "Gpio",
+          "Mapping": "AVNET_MT3620_SK_USER_LED_GREEN",
+          "Comment": "Green LED"
+        },
+        {
+          "Name": "LED_BLUE",
+          "Type": "Gpio",
+          "Mapping": "AVNET_MT3620_SK_USER_LED_BLUE",
+          "Comment": "Blue LED"
+        }
     ]
 }

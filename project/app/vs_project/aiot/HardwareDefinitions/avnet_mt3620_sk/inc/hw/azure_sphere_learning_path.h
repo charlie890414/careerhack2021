@@ -37,7 +37,10 @@
 #define I2cMaster2 AVNET_MT3620_SK_ISU2_I2C
 
 // AVNET Start Kit Definition
-#define Adc0 AVNET_MT3620_SK_ADC_CONTROLLER0
+#define ADC_CONTROLLER0 AVNET_MT3620_SK_ADC_CONTROLLER0
+
+// MT3620 SK: Connect external potentiometer to ADC controller 0, channel 1 using CLICK1 AN.
+#define ADC_CHANNEL1 MT3620_ADC_CHANNEL1
 
 // Red LED
 #define LED_RED AVNET_MT3620_SK_USER_LED_RED

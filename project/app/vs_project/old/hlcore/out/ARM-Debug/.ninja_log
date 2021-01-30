@@ -1,0 +1,24 @@
+# ninja log v5
+1	346	633633773	CMakeFiles/AzureSphereAzureIoT.dir/main.c.obj	c2c3b3daed25e230
+37	399	633633773	CMakeFiles/AzureSphereAzureIoT.dir/D_/CareerHack2021/project/app/vs_project/aiot/LearningPathLibrary/epoll_timerfd_utilities.c.obj	307970f5969da646
+18	441	633633773	CMakeFiles/AzureSphereAzureIoT.dir/D_/CareerHack2021/project/app/vs_project/aiot/LearningPathLibrary/AVNET/board.c.obj	a827d4e69297d392
+132	485	633633773	out/CMakeFiles/azsphere_libs.dir/config.c.obj	b493fb1f852eb91d
+216	571	633633773	out/CMakeFiles/azsphere_libs.dir/eventloop_timer_utilities.c.obj	93851d391ae1d055
+194	624	633633773	out/CMakeFiles/azsphere_libs.dir/inter_core.c.obj	a7d5a59f5bbe2abf
+59	670	633633773	out/CMakeFiles/azsphere_libs.dir/direct_methods.c.obj	28856824d1260f81
+104	727	633633773	out/CMakeFiles/azsphere_libs.dir/azure_iot.c.obj	e1871f29608c3d2e
+347	772	633633773	out/CMakeFiles/azsphere_libs.dir/peripheral_gpio.c.obj	4b3f337324bf104f
+399	790	633633773	out/CMakeFiles/azsphere_libs.dir/terminate.c.obj	71856ce917098014
+442	824	633633773	out/CMakeFiles/azsphere_libs.dir/timer.c.obj	d2421f2485ba924b
+485	827	633633773	out/CMakeFiles/azsphere_libs.dir/utilities.c.obj	ccfa7671719f1c21
+81	872	633633773	out/CMakeFiles/azsphere_libs.dir/device_twins.c.obj	628688255c513faa
+164	885	633633773	out/CMakeFiles/azsphere_libs.dir/parson.c.obj	1289984716b0638d
+571	975	633633774	drivers/CMakeFiles/avnet_drivers.dir/imu_temp_pressure.c.obj	8dbf326d4250c471
+670	1036	633633774	drivers/CMakeFiles/avnet_drivers.dir/light_sensor.c.obj	472ab682c6e74e12
+624	1075	633633774	drivers/CMakeFiles/avnet_drivers.dir/D_/CareerHack2021/project/app/vs_project/aiot/Drivers/AVNET_SK/Common/lps22hh_reg.c.obj	1d001ea2ff62b9e9
+885	1181	633633774	out/libazsphere_libs.a	d3324f246a0ae4ae
+728	1525	633633774	drivers/CMakeFiles/avnet_drivers.dir/D_/CareerHack2021/project/app/vs_project/aiot/Drivers/AVNET_SK/Common/lsm6dso_reg.c.obj	6e65a9645d268e33
+1526	1721	633633774	drivers/libavnet_drivers.a	bc9e2f9163836e18
+1721	2545	633633775	AzureSphereAzureIoT.out	6d23013613e2ea4f
+2545	2736	633633775	approotAzureSphereAzureIoT/bin/app	28686305f7a5dc02
+2736	3415	633633776	AzureSphereAzureIoT.imagepackage	2d4d5c5dc7fac8b3

@@ -58,6 +58,8 @@ typedef enum {
 static int sockFd = -1;
 static int adcControllerFd = -1;
 
+static const char* label[] = { "NO BREATH", "BREATH", "CAUGH", "SPEAK" };
+
 static int sampleBitCount = -1;
 
 static EventLoop *eventLoop = NULL;
@@ -70,7 +72,7 @@ static const char rtAppComponentId[] = "005180bc-402f-4cb3-a662-72937dbcde47";
 
 static void TerminationHandler(int signalNumber);
 static void SendTimerEventHandler(EventLoopTimer *timer);
-static void SendMessageToRTApp(void);
+static void SendMessageToRTApp(uint16_t value);
 static void SocketEventHandler(EventLoop *el, int fd, EventLoop_IoEvents events, void *context);
 static ExitCode InitHandlers(void);
 static void CloseHandlers(void);
@@ -94,23 +96,24 @@ static void SendTimerEventHandler(EventLoopTimer *timer)
         return;
     }
 
-    SendMessageToRTApp();
+    //SendMessageToRTApp();
 }
 
 /// <summary>
 ///     Helper function for TimerEventHandler sends message to real-time capable application.
 /// </summary>
-static void SendMessageToRTApp(void)
+static void SendMessageToRTApp(uint16_t value)
 {
     // Send "hl-app-to-rt-app-%02d" message to RTApp, where the number cycles from 00 to 99.
     static int iter = 0;
 
-    static char txMessage[32];
-    snprintf(txMessage, sizeof(txMessage), "hl-app-to-rt-app-%02d", iter);
+    char msg[2];
+    msg[0] = value >> 8;
+    msg[1] = value & 0xFFFFFFFF;
     iter = (iter + 1) % 100;
-    Log_Debug("Sending: %s\n", txMessage);
+    //Log_Debug("Sending: %s\n", msg);
 
-    int bytesSent = send(sockFd, txMessage, strlen(txMessage), 0);
+    int bytesSent = send(sockFd, msg, strlen(msg), 0);
     if (bytesSent == -1) {
         Log_Debug("ERROR: Unable to send message: %d (%s)\n", errno, strerror(errno));
         exitCode = ExitCode_SendMsg_Send;
@@ -124,7 +127,7 @@ static void SendMessageToRTApp(void)
 static void SocketEventHandler(EventLoop *el, int fd, EventLoop_IoEvents events, void *context)
 {
     // Read response from real-time capable application.
-    // If the RTApp has sent more than 32 bytes, then truncate.
+    // If the RTApp has sent more than 22050 bytes, then truncate.
     char rxBuf[32];
     int bytesReceived = recv(fd, rxBuf, sizeof(rxBuf), 0);
 
@@ -155,6 +158,7 @@ static void AdcPollingEventHandler(EventLoopTimer* timer) {
         return;
     }
     Log_Debug("%d\n", value);
+    // SendMessageToRTApp(value);
 }
 
 /// <summary>
@@ -195,12 +199,13 @@ static ExitCode InitHandlers(void)
         return ExitCode_Init_UnexpectedBitCount;
     }
 
-    struct timespec adcCheckPeriod = { .tv_sec = 1, .tv_nsec = 0 };
+    struct timespec adcCheckPeriod = { .tv_sec = 0, .tv_nsec = 1000000000/220500 };
     adcPollTimer = CreateEventLoopPeriodicTimer(eventLoop, &AdcPollingEventHandler, &adcCheckPeriod);
     if (adcPollTimer == NULL) {
         return ExitCode_Init_AdcPollTimer;
     }
 
+    /*
     // Register a one second timer to send a message to the RTApp.
     static const struct timespec sendPeriod = {.tv_sec = 1, .tv_nsec = 0};
     sendTimer = CreateEventLoopPeriodicTimer(eventLoop, &SendTimerEventHandler, &sendPeriod);
@@ -224,12 +229,13 @@ static ExitCode InitHandlers(void)
     }
 
     // Register handler for incoming messages from real-time capable application.
-    socketEventReg = EventLoop_RegisterIo(eventLoop, sockFd, EventLoop_Input, SocketEventHandler,
-                                          /* context */ NULL);
+    socketEventReg = EventLoop_RegisterIo(eventLoop, sockFd, EventLoop_Input, SocketEventHandler, NULL);
+
     if (socketEventReg == NULL) {
         Log_Debug("ERROR: Unable to register socket event: %d (%s)\n", errno, strerror(errno));
         return ExitCode_Init_RegisterIo;
     }
+    */
 
     return ExitCode_Success;
 }
@@ -264,8 +270,8 @@ static void CloseHandlers(void)
 
 int main(void)
 {
-    Log_Debug("High-level intercore comms application\n");
-    Log_Debug("Sends data to, and receives data from a real-time capable application.\n");
+    // Log_Debug("High-level intercore comms application\n");
+    // Log_Debug("Sends data to, and receives data from a real-time capable application.\n");
 
     exitCode = InitHandlers();
 
